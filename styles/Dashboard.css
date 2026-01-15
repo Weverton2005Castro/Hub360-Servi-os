@@ -1,0 +1,13 @@
+.admin-card {
+  background: #0f172a;
+  color: white;
+  padding: 32px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: transform .2s;
+}
+
+.admin-card:hover {
+  transform: scale(1.05);
+}
