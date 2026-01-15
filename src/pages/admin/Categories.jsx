@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getItemsByCategory } from "../../services/itemsService";
+import "../../styles/admin.css"
 
 export default function Category() {
   const { id } = useParams();

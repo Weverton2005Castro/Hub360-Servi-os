@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getItemsByCategory } from "../services/itemsService";
+import "../styles/item.css"
 
 export default function Category() {
   const { id } = useParams();
@@ -11,11 +12,11 @@ export default function Category() {
   }, [id]);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Serviços / Produtos</h1>
+    <div className="container">
+      <h1>Serviços disponíveis</h1>
 
       {items.map(item => (
-        <div key={item.id} style={{ marginBottom: 15 }}>
+        <div key={item.id} className="grid">
           <h3>{item.title}</h3>
           <p>{item.description}</p>
           <button
