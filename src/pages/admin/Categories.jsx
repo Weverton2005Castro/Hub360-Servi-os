@@ -16,7 +16,6 @@ export default function Category() {
   }, [id]);
 
   if (loading) return <p>Carregando...</p>;
-
   if (!items.length) return <p>Nenhum serviço cadastrado.</p>;
 
   return (

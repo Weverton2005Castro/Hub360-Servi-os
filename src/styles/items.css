@@ -1,0 +1,89 @@
+/* Container geral */
+.items-container {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #0f0f0f;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Título */
+.items-container h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 22px;
+}
+
+/* Inputs, textarea e selects */
+.items-container input,
+.items-container textarea,
+.items-container select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  background: #1c1c1c;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Placeholder */
+.items-container input::placeholder,
+.items-container textarea::placeholder {
+  color: #888;
+}
+
+/* Textarea */
+.items-container textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Input file */
+.items-container input[type="file"] {
+  padding: 8px;
+  background: transparent;
+  color: #aaa;
+}
+
+/* Select */
+.items-container select {
+  cursor: pointer;
+}
+
+/* Erro */
+.items-container .error {
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* Botão */
+.items-container button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ffcc00, #ff9900);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover */
+.items-container button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+/* Disabled */
+.items-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
