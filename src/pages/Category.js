@@ -5,11 +5,15 @@ import "../styles/item.css"
 
 export default function Category() {
   const { id } = useParams();
+  console.log("PARAMS:", { id });
+
   const [items, setItems] = useState([]);
 
   useEffect(() => {
+    if (!id) return;
     getItemsByCategory(id).then(setItems);
   }, [id]);
+
 
   return (
     <div className="container">

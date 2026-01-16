@@ -1,49 +1,44 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getItemsByCategory } from "../../services/itemsService";
+import {
+  getCategories,
+  createCategory,
+  deleteCategory
+} from "../../services/categoriesService";
 import "../../styles/admin.css"
 
-export default function Category() {
-  const { id } = useParams();
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function Categories() {
+  const [categories, setCategories] = useState([]);
+  const [name, setName] = useState("");
 
-  useEffect(() => {
-    getItemsByCategory(id).then(data => {
-      setItems(data);
-      setLoading(false);
+  const load = () => getCategories().then(setCategories);
+
+  useEffect(load, []);
+
+  const handleAdd = async () => {
+    await createCategory({
+      name,
+      description: "",
+      active: true
     });
-  }, [id]);
-
-  if (loading) return <p>Carregando...</p>;
-  if (!items.length) return <p>Nenhum serviço cadastrado.</p>;
+    setName("");
+    load();
+  };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Serviços / Produtos</h1>
+    <div style={{padding: 20}} >
+      <h2>Categorias</h2>
 
-      {items.map(item => (
-        <div
-          key={item.id}
-          style={{
-            border: "1px solid #ccc",
-            padding: 15,
-            borderRadius: 8,
-            marginBottom: 15
-          }}
-        >
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
+      <input
+        value={name}
+        onChange={e => setName(e.target.value)}
+        placeholder="Nome da categoria"
+      />
+      <button onClick={handleAdd}>Adicionar</button>
 
-          <button
-            onClick={() =>
-              window.open(
-                `https://wa.me/559284699650?text=${encodeURIComponent(item.whatsappMessage)}`
-              )
-            }
-          >
-            Chamar no WhatsApp
-          </button>
+      {categories.map(cat => (
+        <div key={cat.id}>
+          {cat.name}
+          <button onClick={() => deleteCategory(cat.id)}>Excluir</button>
         </div>
       ))}
     </div>

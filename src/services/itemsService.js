@@ -4,6 +4,9 @@ import { db } from "../firebase";
 const ref = collection(db, "items");
 
 export const getItemsByCategory = async (categoryId) => {
+
+  if (!categoryId) return [];
+
   const q = query(ref, where("categoryId", "==", categoryId));
   const snapshot = await getDocs(q);
 
