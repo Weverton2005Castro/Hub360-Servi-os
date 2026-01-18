@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../../services/categoriesService";
 import { createItem } from "../../services/itemsService";
+import "../../styles/items.css"
+import { Link } from "react-router-dom";
 
 export default function Items() {
   const [categories, setCategories] = useState([]);
@@ -53,6 +55,9 @@ export default function Items() {
 
   return (
     <div className="items-container">
+      <Link to="/admin" >
+        <button className="btn-back" >Voltar</button>
+      </Link>
       <h2>Criar Serviço / Produto</h2>
 
       <input
