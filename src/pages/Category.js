@@ -1,11 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { getItemsByCategory } from "../services/itemsService";
+
 import claro1 from "../assets/claro1.jpeg";
 import claro2 from "../assets/claro2.jpeg";
 import claro3 from "../assets/claro3.jpeg";
-import "../styles/category.css";
 
+import "../styles/category.css";
 
 const ITEM_IMAGES = {
   "Instalação de Internet Claro": [claro1],
@@ -13,7 +14,49 @@ const ITEM_IMAGES = {
   "Roteador": [claro3],
 };
 
-function CardImage({ images = [] }) {
+const OFERTA_FIBRA = `
+🚀 OFERTAS DISPONÍVEIS 🚀
+
+PLANO ESSENCIAL 🥉
+BENEFÍCIO: WI-FI 5G.
+
+🥉 500 MEGA R$90,00 (Crédito)
+🥉 500 MEGA R$100,00 (Débito/Boleto)
+
+PLANO SUPER 🥈
+BENEFÍCIOS: WI-FI 6G + GLOBOPLAY POR 12 MESES.
+
+🥈 700 MEGA R$120,00 (Crédito)
+🥈 700 MEGA R$130,00 (Débito/Boleto)
+
+PLANO ULTRA 🥇
+BENEFÍCIOS: WI-FI 6G + GLOBOPLAY POR 12 MESES + REPETIDOR DE SINAL GRATUITO.
+
+🥇 1 GIGA R$150,00 (Crédito)
+🥇 1 GIGA R$160,00 (Débito/Boleto)
+
+A instalação é grátis.
+Qual oferta tem interesse em assinar conosco?
+`;
+
+function CardMedia({ item, fallbackImages = [] }) {
+  // ✅ Se for vídeo, renderiza vídeo no fundo
+  if (item?.mediaType === "video" && item?.mediaUrl) {
+    return (
+      <video
+        className="catCard__video"
+        src={item.mediaUrl}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="metadata"
+      />
+    );
+  }
+
+  // ✅ Caso contrário, usa imagens (importadas ou do firestore)
+  const images = fallbackImages;
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -58,6 +101,8 @@ export default function Category() {
 
   const openWhats = (msg) => {
     const phone = "559284699650";
+
+    // se quiser usar a mensagem do item, faz: msg || OFERTA_FIBRA
     const text = encodeURIComponent(msg || OFERTA_FIBRA);
 
     window.open(
@@ -66,32 +111,6 @@ export default function Category() {
       "noopener,noreferrer"
     );
   };
-
-  const OFERTA_FIBRA = `
-🚀 OFERTAS DISPONÍVEIS 🚀
-
-PLANO ESSENCIAL 🥉
-BENEFÍCIO: WI-FI 5G.
-
-🥉 500 MEGA R$90,00 (Crédito)
-🥉 500 MEGA R$100,00 (Débito/Boleto)
-
-PLANO SUPER 🥈
-BENEFÍCIOS: WI-FI 6G + GLOBOPLAY POR 12 MESES.
-
-🥈 700 MEGA R$120,00 (Crédito)
-🥈 700 MEGA R$130,00 (Débito/Boleto)
-
-PLANO ULTRA 🥇
-BENEFÍCIOS: WI-FI 6G + GLOBOPLAY POR 12 MESES + REPETIDOR DE SINAL GRATUITO.
-
-🥇 1 GIGA R$150,00 (Crédito)
-🥇 1 GIGA R$160,00 (Débito/Boleto)
-
-A instalação é grátis.
-Qual oferta tem interesse em assinar conosco?
-`;
-
 
   return (
     <div className="cat">
@@ -131,14 +150,16 @@ Qual oferta tem interesse em assinar conosco?
       <main className="cat__container">
         <div className="cat__grid">
           {filtered.map((item) => {
-
+            // 1) imagens fixas por título
             const importedImages = ITEM_IMAGES[item.title] || [];
 
+            // 2) fallback: firestore (images/image/mediaUrl quando for imagem)
             const firestoreImages = (
               Array.isArray(item.images) ? item.images : []
             )
               .filter(Boolean)
               .concat(item.image ? [item.image] : [])
+              .concat(item.mediaType === "image" && item.mediaUrl ? [item.mediaUrl] : [])
               .filter(Boolean);
 
             const finalImages =
@@ -146,7 +167,8 @@ Qual oferta tem interesse em assinar conosco?
 
             return (
               <article key={item.id} className="catCard">
-                <CardImage images={finalImages} />
+                {/* ✅ agora suporta vídeo */}
+                <CardMedia item={item} fallbackImages={finalImages} />
 
                 <div className="catCard__shade" />
 

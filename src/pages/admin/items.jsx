@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../../services/categoriesService";
 import { createItem } from "../../services/itemsService";
-import "../../styles/items.css"
+import "../../styles/items.css";
 import { Link } from "react-router-dom";
+
+import { ITEM_MEDIA } from "../../assets/itemMedia";
 
 export default function Items() {
   const [categories, setCategories] = useState([]);
@@ -14,15 +16,32 @@ export default function Items() {
     description: "",
     categoryId: "",
     type: "service",
-    image: ""
+
+    // ✅ novos campos
+    mediaUrl: "",
+    mediaType: "", // "image" | "video"
   });
 
   useEffect(() => {
     getCategories().then(setCategories);
   }, []);
 
+  const handlePickMedia = (value) => {
+    if (!value) {
+      setForm((prev) => ({ ...prev, mediaUrl: "", mediaType: "" }));
+      return;
+    }
+
+    const picked = ITEM_MEDIA.find((m) => m.src === value);
+    setForm((prev) => ({
+      ...prev,
+      mediaUrl: picked?.src || value,
+      mediaType: picked?.type || "",
+    }));
+  };
+
   const handleSubmit = async () => {
-    if (!form.title || !form.description || !form.categoryId || !form.image) {
+    if (!form.title || !form.description || !form.categoryId || !form.mediaUrl || !form.mediaType) {
       setError("Preencha todos os campos obrigatórios");
       return;
     }
@@ -32,8 +51,19 @@ export default function Items() {
       setError("");
 
       await createItem({
-        ...form,
-        active: true
+        title: form.title,
+        description: form.description,
+        categoryId: form.categoryId,
+        type: form.type,
+
+        // ✅ salva mídia
+        mediaUrl: form.mediaUrl,
+        mediaType: form.mediaType,
+
+        // (opcional) compatibilidade com seu código antigo que usa item.image
+        image: form.mediaType === "image" ? form.mediaUrl : "",
+
+        active: true,
       });
 
       alert("Item criado com sucesso 🚀");
@@ -43,9 +73,9 @@ export default function Items() {
         description: "",
         categoryId: "",
         type: "service",
-        image: ""
+        mediaUrl: "",
+        mediaType: "",
       });
-
     } catch (err) {
       setError("Deu ruim ao criar o item 😵");
     } finally {
@@ -55,58 +85,72 @@ export default function Items() {
 
   return (
     <div className="items-container">
-      <Link to="/admin" >
-        <button className="btn-back" >Voltar</button>
+      <Link to="/admin">
+        <button className="btn-back">Voltar</button>
       </Link>
+
       <h2>Criar Serviço / Produto</h2>
 
       <input
         value={form.title}
         placeholder="Título"
-        onChange={e => setForm({ ...form, title: e.target.value })}
+        onChange={(e) => setForm({ ...form, title: e.target.value })}
       />
 
+      {/* ✅ seletor de mídia (imagem/vídeo) */}
+      <select value={form.mediaUrl} onChange={(e) => handlePickMedia(e.target.value)}>
+        <option value="">Selecione uma imagem ou vídeo</option>
+        {ITEM_MEDIA.map((m) => (
+          <option key={m.src} value={m.src}>
+            {m.label}
+          </option>
+        ))}
+      </select>
+
+      {/* (opcional) input manual pra colar URL */}
       <input
-        value={form.image}
-        placeholder="/images/itens/exemplo.jpg"
-        onChange={e => setForm({ ...form, image: e.target.value })}
+        value={form.mediaUrl}
+        placeholder="ou cole uma URL de imagem/vídeo aqui"
+        onChange={(e) => setForm({ ...form, mediaUrl: e.target.value })}
       />
 
-      {/* Preview da imagem */}
-      {form.image && (
+      {/* ✅ Preview inteligente */}
+      {form.mediaUrl && form.mediaType === "image" && (
         <img
-          src={form.image}
+          src={form.mediaUrl}
           alt="Preview"
-          style={{
-            width: "100%",
-            borderRadius: "6px",
-            marginBottom: "14px"
-          }}
+          style={{ width: "100%", borderRadius: "10px", marginBottom: "14px" }}
+        />
+      )}
+
+      {form.mediaUrl && form.mediaType === "video" && (
+        <video
+          src={form.mediaUrl}
+          controls
+          preload="metadata"
+          style={{ width: "100%", borderRadius: "10px", marginBottom: "14px" }}
         />
       )}
 
       <textarea
         placeholder="Descrição"
         value={form.description}
-        onChange={e => setForm({ ...form, description: e.target.value })}
+        onChange={(e) => setForm({ ...form, description: e.target.value })}
       />
 
       <select
         value={form.categoryId}
-        onChange={e => setForm({ ...form, categoryId: e.target.value })}
+        onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
       >
         <option value="">Selecione a categoria</option>
-        {categories.map(cat => (
+        {categories.map((cat) => (
           <option key={cat.id} value={cat.id}>
             {cat.name}
           </option>
         ))}
       </select>
 
-      <select
-        value={form.type}
-        onChange={e => setForm({ ...form, type: e.target.value })}
-      >
+      <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })}>
         <option value="service">Serviço</option>
         <option value="product">Produto</option>
       </select>

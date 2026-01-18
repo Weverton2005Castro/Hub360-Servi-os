@@ -1,102 +1,316 @@
-/* Container geral */
-.admin-container {
-  padding: 24px;
-  max-width: 800px;
+/* adminCategories.css */
+.adminCats {
+  min-height: 100vh;
+  padding: 28px 18px 42px;
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(99, 102, 241, 0.18), transparent 60%),
+    radial-gradient(900px 500px at 85% 15%, rgba(16, 185, 129, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 50% 90%, rgba(236, 72, 153, 0.10), transparent 60%),
+    linear-gradient(180deg, #0b1020 0%, #090d18 100%);
+  color: #e8eaf1;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.adminCats__header {
+  max-width: 920px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.adminCats__badge {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.16);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  margin: 0 0 10px;
+}
+
+.adminCats__title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: -0.4px;
+}
+
+.adminCats__subtitle {
+  margin: 8px 0 0;
+  color: rgba(232, 234, 241, 0.72);
+  font-size: 13px;
+  max-width: 560px;
+}
+
+.adminCats__backLink {
+  text-decoration: none;
+}
+
+.adminCats__backBtn {
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.26);
+  color: rgba(232, 234, 241, 0.92);
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.adminCats__backBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.14);
+}
+
+.adminCats__card {
+  max-width: 920px;
   margin: 0 auto;
-  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.30);
 }
 
-/* Título */
-.admin-container h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #222;
-}
-
-/* Área de adicionar categoria */
-.add-category {
+.adminCats__add {
   display: flex;
   gap: 10px;
-  margin-bottom: 24px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.add-category input {
+.adminCats__input {
   flex: 1;
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.add-category input:focus {
+  min-width: min(520px, 100%);
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.26);
+  color: #e8eaf1;
   outline: none;
-  border-color: #4f46e5;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-/* Botão adicionar */
-.add-category button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  background: #4f46e5;
-  color: white;
-  font-weight: bold;
+.adminCats__input::placeholder {
+  color: rgba(232, 234, 241, 0.45);
+}
+
+.adminCats__input:focus {
+  transform: translateY(-1px);
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.16);
+}
+
+.adminCats__addBtn {
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(16, 185, 129, 0.16);
+  color: rgba(232, 234, 241, 0.94);
   cursor: pointer;
+  font-weight: 800;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
-.add-category button:hover {
-  background: #4338ca;
+.adminCats__addBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(16, 185, 129, 0.32);
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.12);
+  background: rgba(16, 185, 129, 0.22);
 }
 
-/* Lista de categorias */
-.category-list {
+.adminCats__list {
+  margin-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-/* Card da categoria */
-.category-card {
+.adminCats__row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
-  border-radius: 8px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.18);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
-/* Nome da categoria */
-.category-card span {
-  font-size: 16px;
-  color: #111;
+.adminCats__row:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
 }
 
-/* Botão excluir */
-.category-card button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  background: #dc2626;
-  color: white;
+.adminCats__rowLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.adminCats__name {
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+.adminCats__status {
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(232, 234, 241, 0.78);
+}
+
+.adminCats__status.isOn {
+  border-color: rgba(16, 185, 129, 0.26);
+  background: rgba(16, 185, 129, 0.12);
+  color: rgba(232, 234, 241, 0.92);
+}
+
+.adminCats__status.isOff {
+  border-color: rgba(244, 63, 94, 0.26);
+  background: rgba(244, 63, 94, 0.10);
+  color: rgba(232, 234, 241, 0.88);
+}
+
+.adminCats__delBtn {
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(244, 63, 94, 0.28);
+  background: rgba(244, 63, 94, 0.12);
+  color: rgba(232, 234, 241, 0.94);
   cursor: pointer;
-  font-size: 13px;
+  font-weight: 800;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
-.category-card button:hover {
-  background: #b91c1c;
+.adminCats__delBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(244, 63, 94, 0.42);
+  box-shadow: 0 0 0 6px rgba(244, 63, 94, 0.12);
+  background: rgba(244, 63, 94, 0.18);
 }
 
-.back-button {
-  background: transparent;
-  border: none;
-  color: #4f46e5;
-  font-size: 14px;
+.adminCats__empty {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(232, 234, 241, 0.75);
+}
+
+.adminCats__empty h3 {
+  margin: 0 0 6px;
+  color: rgba(232, 234, 241, 0.92);
+}
+
+.adminCats__empty p {
+  margin: 0;
+}
+
+.adminCats__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.adminCats__editBtn {
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(99, 102, 241, 0.16);
+  color: rgba(232, 234, 241, 0.94);
   cursor: pointer;
-  margin-bottom: 16px;
-  padding: 0;
+  font-weight: 800;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
-.back-button:hover {
-  text-decoration: underline;
+.adminCats__editBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.14);
+  background: rgba(99, 102, 241, 0.22);
+}
+
+.adminCats__saveBtn {
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  background: rgba(16, 185, 129, 0.14);
+  color: rgba(232, 234, 241, 0.94);
+  cursor: pointer;
+  font-weight: 900;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.adminCats__saveBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(16, 185, 129, 0.42);
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.12);
+  background: rgba(16, 185, 129, 0.20);
+}
+
+.adminCats__cancelBtn {
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.26);
+  color: rgba(232, 234, 241, 0.90);
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.adminCats__cancelBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.10);
+}
+
+.adminCats__editWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(520px, 100%);
+}
+
+.adminCats__editInput {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.26);
+  color: #e8eaf1;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.adminCats__editInput:focus {
+  transform: translateY(-1px);
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.16);
+}
+
+.adminCats__editHint {
+  font-size: 12px;
+  color: rgba(232, 234, 241, 0.60);
 }
