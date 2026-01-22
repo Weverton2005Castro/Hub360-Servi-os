@@ -56,7 +56,6 @@ export default function Items() {
         categoryId: form.categoryId,
         type: form.type,
 
-        // ✅ salva mídia
         mediaUrl: form.mediaUrl,
         mediaType: form.mediaType,
 

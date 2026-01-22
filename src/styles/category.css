@@ -1,19 +1,13 @@
-/* ===========================
-   BASE
-=========================== */
 .cat {
   min-height: 100vh;
   background:
-    radial-gradient(900px 500px at 15% 10%, rgba(99,102,241,0.18), transparent 60%),
-    radial-gradient(900px 500px at 85% 15%, rgba(16,185,129,0.14), transparent 60%),
-    radial-gradient(900px 500px at 50% 90%, rgba(236,72,153,0.10), transparent 60%),
+    radial-gradient(900px 500px at 15% 10%, rgba(99, 102, 241, 0.18), transparent 60%),
+    radial-gradient(900px 500px at 85% 15%, rgba(16, 185, 129, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 50% 90%, rgba(236, 72, 153, 0.10), transparent 60%),
     linear-gradient(180deg, #0b1020 0%, #090d18 100%);
   color: #e8eaf1;
 }
 
-/* ===========================
-   HERO
-=========================== */
 .cat__hero {
   padding: 42px 18px 26px;
 }
@@ -21,12 +15,12 @@
 .cat__heroInner {
   max-width: 1120px;
   margin: 0 auto;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   padding: 22px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(10px);
-  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
 }
 
 .cat__topRow {
@@ -42,24 +36,24 @@
   display: flex;
   gap: 8px;
   font-size: 13px;
-  color: rgba(232,234,241,0.65);
+  color: rgba(232, 234, 241, 0.65);
 }
 
 .cat__crumb {
-  color: rgba(232,234,241,0.86);
+  color: rgba(232, 234, 241, 0.86);
   text-decoration: none;
   border-bottom: 1px solid transparent;
 }
 
 .cat__crumb:hover {
-  border-bottom-color: rgba(232,234,241,0.35);
+  border-bottom-color: rgba(232, 234, 241, 0.35);
 }
 
 .cat__pill {
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(16,185,129,0.14);
-  border: 1px solid rgba(16,185,129,0.20);
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.20);
   font-weight: 600;
   font-size: 12px;
 }
@@ -72,7 +66,7 @@
 
 .cat__subtitle {
   margin-top: 10px;
-  color: rgba(232,234,241,0.78);
+  color: rgba(232, 234, 241, 0.78);
   max-width: 760px;
 }
 
@@ -89,15 +83,15 @@
   width: 100%;
   padding: 14px 44px 14px 14px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.28);
   color: #e8eaf1;
 }
 
 .cat__search:focus {
   outline: none;
-  border-color: rgba(99,102,241,0.55);
-  box-shadow: 0 0 0 6px rgba(99,102,241,0.16);
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.16);
 }
 
 /* ===========================
@@ -123,40 +117,65 @@
   min-height: 330px;
   border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
 .catCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(255,255,255,0.16);
-  box-shadow: 0 22px 50px rgba(0,0,0,0.42);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.42);
 }
 
 /* ===========================
    MEDIA - IMAGEM
 =========================== */
-.catCard__media {
+/* ===========================
+   MEDIA - IMAGEM (SEM CORTAR)
+=========================== */
+.catCard__mediaWrap {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.03);
-  filter: brightness(0.92) saturate(1.08) contrast(1.03);
-  transition: transform 220ms ease, filter 220ms ease;
+  z-index: 0;
 
-  /* fallback */
-  background-image:
-    radial-gradient(600px 240px at 20% 0%, rgba(99,102,241,.35), transparent 50%),
-    radial-gradient(600px 240px at 80% 0%, rgba(16,185,129,.25), transparent 50%),
+  /* “fundo” elegante para quando a imagem não preencher tudo */
+  background:
+    radial-gradient(600px 240px at 20% 0%, rgba(99, 102, 241, .28), transparent 52%),
+    radial-gradient(600px 240px at 80% 0%, rgba(16, 185, 129, .20), transparent 52%),
+    linear-gradient(135deg, #111827, #020617);
+
+  /* isso evita “sobras” feias em algumas renderizações */
+  overflow: hidden;
+}
+
+.catCard__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  /* ✅ A mágica: não corta, adapta */
+  object-fit: contain;
+  object-position: center;
+
+  /* deixa com cara premium */
+  transform: scale(1.01);
+  filter: brightness(0.94) saturate(1.06) contrast(1.03);
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+/* fallback quando não tem imagem nenhuma */
+.catCard__mediaFallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(600px 240px at 20% 0%, rgba(99, 102, 241, .35), transparent 50%),
+    radial-gradient(600px 240px at 80% 0%, rgba(16, 185, 129, .25), transparent 50%),
     linear-gradient(135deg, #111827, #020617);
 }
 
-/* ===========================
-   MEDIA - VÍDEO
-=========================== */
 .catCard__video {
   position: absolute;
   inset: 0;
@@ -169,28 +188,22 @@
   transition: transform 220ms ease, filter 220ms ease;
 }
 
-/* hover para ambos */
-.catCard:hover .catCard__media,
+/* hover para imagem e vídeo */
+.catCard:hover .catCard__img,
 .catCard:hover .catCard__video {
-  transform: scale(1.06);
-  filter: brightness(0.94) saturate(1.12) contrast(1.06);
+  transform: scale(1.05);
+  filter: brightness(0.96) saturate(1.12) contrast(1.06);
 }
 
-/* ===========================
-   OVERLAY
-=========================== */
 .catCard__shade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.90) 78%),
-    radial-gradient(700px 220px at 20% 0%, rgba(99,102,241,0.22), transparent 45%),
-    radial-gradient(700px 220px at 80% 0%, rgba(16,185,129,0.18), transparent 45%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.90) 78%),
+    radial-gradient(700px 220px at 20% 0%, rgba(99, 102, 241, 0.22), transparent 45%),
+    radial-gradient(700px 220px at 80% 0%, rgba(16, 185, 129, 0.18), transparent 45%);
 }
 
-/* ===========================
-   CONTENT
-=========================== */
 .catCard__media,
 .catCard__video,
 .catCard__shade {
@@ -217,7 +230,7 @@
 
 .catCard__desc {
   font-size: 13px;
-  color: rgba(232,234,241,0.78);
+  color: rgba(232, 234, 241, 0.78);
   line-height: 1.45;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -233,8 +246,8 @@
   width: 100%;
   padding: 12px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.28);
   color: #e8eaf1;
   font-weight: 700;
   cursor: pointer;
@@ -243,8 +256,8 @@
 
 .catCard__btn:hover {
   transform: translateY(-1px);
-  border-color: rgba(16,185,129,0.35);
-  box-shadow: 0 0 0 6px rgba(16,185,129,0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.12);
 }
 
 /* ===========================
@@ -254,7 +267,7 @@
   margin-top: 18px;
   padding: 18px;
   border-radius: 16px;
-  border: 1px dashed rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.03);
-  color: rgba(232,234,241,0.72);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(232, 234, 241, 0.72);
 }

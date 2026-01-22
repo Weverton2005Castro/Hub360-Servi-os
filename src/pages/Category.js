@@ -1,17 +1,16 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { getItemsByCategory } from "../services/itemsService";
-
-import claro1 from "../assets/claro1.jpeg";
-import claro2 from "../assets/claro2.jpeg";
-import claro3 from "../assets/claro3.jpeg";
-
+import Claro1 from "../assets/Claro/Claro1.jpeg";
+import Claro2 from "../assets/Claro/Claro2.jpeg";
+import Claro3 from "../assets/Claro/Claro3.jpeg";
 import "../styles/category.css";
 
+
 const ITEM_IMAGES = {
-  "Instalação de Internet Claro": [claro1],
-  "Planos": [claro2],
-  "Roteador": [claro3],
+  "Instalação de Internet Claro": [Claro1],
+  "Planos": [Claro2],
+  "Roteador": [Claro3],
 };
 
 const OFERTA_FIBRA = `
@@ -40,7 +39,7 @@ Qual oferta tem interesse em assinar conosco?
 `;
 
 function CardMedia({ item, fallbackImages = [] }) {
-  // ✅ Se for vídeo, renderiza vídeo no fundo
+  // ✅ Vídeo: continua cover (fica melhor)
   if (item?.mediaType === "video" && item?.mediaUrl) {
     return (
       <video
@@ -55,9 +54,13 @@ function CardMedia({ item, fallbackImages = [] }) {
     );
   }
 
-  // ✅ Caso contrário, usa imagens (importadas ou do firestore)
-  const images = fallbackImages;
+  // ✅ Imagens: usar <img> com object-fit: contain (não corta)
+  const images = Array.isArray(fallbackImages) ? fallbackImages : [];
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [images.join("|")]);
 
   useEffect(() => {
     if (!images || images.length <= 1) return;
@@ -69,11 +72,22 @@ function CardMedia({ item, fallbackImages = [] }) {
     return () => clearInterval(timer);
   }, [images]);
 
+  const src = images[index];
+
   return (
-    <div
-      className="catCard__media"
-      style={images.length ? { backgroundImage: `url(${images[index]})` } : {}}
-    />
+    <div className="catCard__mediaWrap" aria-hidden="true">
+      {src ? (
+        <img
+          className="catCard__img"
+          src={src}
+          alt=""
+          loading="lazy"
+          draggable="false"
+        />
+      ) : (
+        <div className="catCard__mediaFallback" />
+      )}
+    </div>
   );
 }
 
