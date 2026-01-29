@@ -98,7 +98,7 @@ export default function Items() {
 
       {/* ✅ seletor de mídia (imagem/vídeo) */}
       <select value={form.mediaUrl} onChange={(e) => handlePickMedia(e.target.value)}>
-        <option value="">Selecione uma imagem ou vídeo</option>
+        <option disabled value="">Selecione uma imagem ou vídeo</option>
         {ITEM_MEDIA.map((m) => (
           <option key={m.src} value={m.src}>
             {m.label}
@@ -141,7 +141,7 @@ export default function Items() {
         value={form.categoryId}
         onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
       >
-        <option value="">Selecione a categoria</option>
+        <option disabled value="">Selecione a categoria</option>
         {categories.map((cat) => (
           <option key={cat.id} value={cat.id}>
             {cat.name}
